@@ -20,6 +20,7 @@ public class Conexion {
     private  Conexion() {
         this.bd=Persistence.createEntityManagerFactory("com_soporte_war_1.0PU");
         
+        
     }
     
     
