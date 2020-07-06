@@ -6,9 +6,13 @@
 package soporte;
 
 import dao.Conexion;
+import dao.DependenciaJpaController;
+import dao.EstadoJpaController;
 import dao.SolicitudJpaController;
 import dao.SoporteJpaController;
 import dao.UsuarioJpaController;
+import dto.Dependencia;
+import dto.Estado;
 import dto.Solicitud;
 import dto.Soporte;
 import dto.Usuario;
@@ -23,6 +27,8 @@ public class soporteNegocio {
     UsuarioJpaController ujc;
     SoporteJpaController sjc;
     SolicitudJpaController sojc;
+    DependenciaJpaController djc;
+    EstadoJpaController ejc;
     
     
     //singleton 
@@ -41,6 +47,14 @@ public class soporteNegocio {
     public List<Solicitud> getSolicitudes(){
         sojc=new SolicitudJpaController(con.getBd());
         return sojc.findSolicitudEntities();
+    }
+    public List<Dependencia> getDependencia(){
+        djc=new DependenciaJpaController(con.getBd());
+        return djc.findDependenciaEntities();
+    }
+    public List<Estado> getEstado(){
+        ejc=new EstadoJpaController(con.getBd());
+        return ejc.findEstadoEntities();
     }
     
     public int login(String email,String clave){
