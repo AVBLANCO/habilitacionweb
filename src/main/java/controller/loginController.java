@@ -5,12 +5,14 @@
  */
 package controller;
 
+import dto.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import soporte.soporteNegocio;
 
 /**
  *
@@ -73,9 +75,24 @@ public class loginController extends HttpServlet {
         
         String email=request.getParameter("email");
         String clave=request.getParameter("clave");
+        soporteNegocio sn=new soporteNegocio();
+        int login= sn.login(email, clave);
+        System.out.println(" int login: "+login);
+        Usuario u=new Usuario();
+        u.setEmail(email);
+        u.setClave(clave);
         
-        
-        
+        if(login != 0){
+            if(login == 1){
+                request.getSession().setAttribute("usuario",u);
+                request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
+            }else if(login == 2){
+                request.getSession().setAttribute("usuario",u);
+                request.getRequestDispatcher("./jsp/usuarioDependecia.jsp").forward(request, response);
+            }
+        }else{
+            request.getRequestDispatcher("./jsp/Error.jsp").forward(request, response);
+        }
     }
 
     /**
