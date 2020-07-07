@@ -206,9 +206,9 @@
                                                 <div class="col-md-8">
                                                     <label for="formGroupExampleInput2">Estado </label> <br>
                                                     <select name="estado">
-                                                        <!-- <c:forEach var="a" items="${soporte.getEstado()}">
+                                                        <c:forEach var="a" items="${soporte.getEstado()}">
                                                              <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
-                                                        </c:forEach>-->
+                                                        </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
