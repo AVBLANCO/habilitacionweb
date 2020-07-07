@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="soporte.soporteNegocio" %> 
+<%@page import="dto.Solicitud" %>
 
 <!DOCTYPE html>
 <html>
@@ -47,18 +48,18 @@
 
     %>
 
-    <jsp:useBean id="soporte" class="soporte.soporteNegocio"></jsp:useBean>
+    <jsp:useBean id="soporte" class="soporte.soporteNegocio"/>
 
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container">
-                <div class="h-logo"><img style="background-color: transparent;" src="https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logo-horizontal.jpg" width="200" ></div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <div class="h-logo"><img style="background-color: transparent;" src="https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logo-horizontal.jpg" width="200" ></div>
 
-                <ul class="nav navbar-nav navbar-right main-nav">
-                    <li><a href="#intro">Inicio</a></li>
-                    <li><a href="#Solicitud">Registrar Solicitud</a></li>
-                    <li><a href="#Listar">Listar Solicitudes</a></li>
-                    <li><a type="button" class="btn btn-secondary" href="cerrarSesion">Cerrar sesion</a></li>
-                    <li> <a> <%=alsesion.getNombre()%></a>  </li>
+            <ul class="nav navbar-nav navbar-right main-nav">
+                <li><a href="#intro">Inicio</a></li>
+                <li><a href="#Solicitud">Registrar Solicitud</a></li>
+                <li><a href="#Listar">Listar Solicitudes</a></li>
+                <li><a type="button" class="btn btn-secondary" href="cerrarSesion">Cerrar sesion</a></li>
+                <li> <a> <%=alsesion.getNombre()%></a>  </li>
 
             </ul>
 
@@ -103,7 +104,7 @@
                                                     <label for="formGroupExampleInput2">Dependencias </label> <br>
                                                     <select name="dependencia">
                                                         <c:forEach var="a" items="${soporte.getDependencia()}">
-                                                            <option value="<c:out value="${a.id}"/> "> <c:out value="${a.descripcion}"/> </option>
+                                                            <option value="<c:out value="${a.id}"/>"> <c:out value="${a.descripcion}"/> </option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
@@ -118,13 +119,13 @@
                                                     <select name="estado">
                                                         <c:forEach var="a" items="${soporte.getEstado()}">
                                                             <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
-                                                            
+
                                                         </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                          
+
 
                                             <div class="form-group">
                                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
@@ -201,90 +202,127 @@
         <br>
     </section>
 
-  <section id="Listar">
-     <div class="container">
-         <h2>Listar Solicitudes</h2>
-           <div class="grid_3 grid_5">
-             <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-               <div id="myTabContent" class="tab-content">
-                 <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
-                     <div class="row">
-                       <div class="col-md-12">
-                         <div class="well well-sm">
-                            <div class="container">
-                                <table>
-                                <thead>
-                                  <tr><th>Id</th>
-                                  <th>Dependencia</th>
-                                  <th>Usuario</th>
-                                  <th>Fecha</th>
-                                  <th>Estado</th>
-                                  <th>Calificar</th>
-                                  </tr>
-                                </thead>
-                                
-                                  
-                                  <c:forEach var="solicitud"  items="${list}">
-                                  <tr>
-                                  <td><c:out value="${solicitud.id}"/></td>
-                                  <td><c:out value="${solicitud.dependencia}"/></td>
-                                  <td><c:out value="${solicitud.usuario}"/></td>
-                                  <td><c:out value="${solicitud.fechasolicitud}"/></td>
-                                  <td><c:out value="${solicitud.estado}"/></td>
-                                  <td>
-                                  <select name="calificacion" class="form-control form-control-lg">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  </select>
-                                  </td>
-                                  
-                                 
-                                  <td><a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> "> Eliminar</td>
-                                  </tr>
-                                   </c:forEach>
-                                 </table>
+    <section id="Listar">
+        <div class="container">
+            <h2>Listar Solicitudes</h2>
+            <div class="grid_3 grid_5">
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well well-sm">
+                                        <div class="container">
+                                            <table>
+                                                <thead>
+                                                    <tr><th>Id</th>
+                                                        <th>Dependencia</th>
+                                                        <th>Usuario</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estado</th>
+                                                        <th>Calificar</th>
+                                                    </tr>
+                                                </thead>
+
+
+                                                <c:forEach var="solicitud"  items="${list}">
+                                                    <tr>
+                                                        <td><c:out value="${solicitud.id}"/></td>
+                                                        <td><c:out value="${solicitud.dependencia}"/></td>
+                                                        <td><c:out value="${solicitud.usuario}"/></td>
+                                                        <td><c:out value="${solicitud.fechasolicitud}"/></td>
+                                                        <td><c:out value="${solicitud.estado}"/></td>
+                                                        <td><a href="usuarioController?action=showcalificar&id= <c:out value="${solicitud.id}"/>" data-toggle="modal" data-target="#myModal"> Calificar </a></td>
+                                                        
+                                                        <td><a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> "> Eliminar </a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
-<br>
-<br>
-<br>
-
-<section class="content-section bg-primary text-white text-center" id="intro">
-    <div class="container">
-        <div class="content-section-heading">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-
                 </div>
             </div>
         </div>
+    </section>
+    <br>
+    <br>
+    <br>
+
+    <!--aqui-->
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Calificar Solicitud</h4>
+
+
+                </div>
+
+                <form action="usuarioController?action=calificar"  >
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                      <select name="calificacion" class="form-control form-control-lg">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                </div>
+                      <% String idcalificar=request.getParameter("idServlet"); %>
+
+                      <input type="hidden" value="<%=idcalificar %>" name="idinput"   />
+                      
+                <input id="obervacion"  name="observacion " type="text" placeholder="observacion" class="form-control" >
+
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info" data-dismiss="modal">Calificar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <br>
-    <br>
-</section>     
+    <!---->
+
+
+    <section class="content-section bg-primary text-white text-center" id="intro">
+        <div class="container">
+            <div class="content-section-heading">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+    </section>     
 
 
 
 
-<footer> Habilitacion web - 2020</footer>
+    <footer> Habilitacion web - 2020</footer>
 
 
-<%           } else {  %>
+    <%           } else {  %>
 
-<% response.sendRedirect("../index.html"); %>
-<%   }
-%>
+    <% response.sendRedirect("../index.html"); %>
+    <%   }
+    %>
 </body>
 </html>

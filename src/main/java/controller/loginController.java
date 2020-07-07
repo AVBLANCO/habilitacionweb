@@ -100,7 +100,7 @@ public class loginController extends HttpServlet {
                 request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
             }
         }else{
-            request.getRequestDispatcher("./jsp/Error.jsp").forward(request, response);
+            request.getRequestDispatcher("./jsp/error.jsp").forward(request, response);
         }
     }
 

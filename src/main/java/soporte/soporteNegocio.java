@@ -18,8 +18,8 @@ import dto.Estado;
 import dto.Solicitud;
 import dto.Soporte;
 import dto.Usuario;
+import java.util.ArrayList;
 
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -124,6 +124,30 @@ public class soporteNegocio {
         }
     }
 
+    public List<Solicitud> getSolicitudes(Usuario u) {
+        sojc = new SolicitudJpaController(con.getBd());
+        Usuario user = this.findUsuario(u.getEmail());
+        return user.getSolicitudList();
+    }
+
+    public Solicitud solicitudBus(int id) {
+        sojc = new SolicitudJpaController(con.getBd());
+        return sojc.findSolicitud(id);
+    }
+
+    public boolean responderSolicitud(Solicitud s) {
+
+        try {
+            sojc = new SolicitudJpaController(con.getBd());
+            sojc.edit(s);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(soporteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(soporteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+
     public boolean calificar(int id, int calificacion, String observacion) {
 
         sojc = new SolicitudJpaController(con.getBd());
@@ -145,13 +169,64 @@ public class soporteNegocio {
         }
         return false;
     }
-    
-    public List<Solicitud> getSolicitudes(Usuario u){
-        sojc=new SolicitudJpaController(con.getBd());
-        Usuario user=this.findUsuario(u.getEmail());
-        return user.getSolicitudList();
-    }
-   
 
+    public Soporte buscarSoporte(Usuario u) {
+        List<Soporte> lu = this.getSoporte();
+        for (Soporte soporte : lu) {
+            if (soporte.getUsuario().getEmail().equals(u.getEmail())) {
+                return soporte;
+            }
+        }
+        return null;
+    }
+
+    public void asignar(Solicitud s, Soporte sop) {
+        try {
+            sojc = new SolicitudJpaController(con.getBd());
+            sjc = new SoporteJpaController(con.getBd());
+            sop.getSolicitudList().add(s);
+            sjc.edit(sop);
+
+            s.setTecnico(sop);
+            sojc.edit(s);
+
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(soporteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(soporteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public Solicitud filtrar(String frase) {
+        sojc = new SolicitudJpaController(con.getBd());
+        List<Solicitud> su = sojc.findSolicitudEntities();
+        for (Solicitud usu : su) {
+            if (usu.getDescripcion().contains(frase)) {
+
+                return usu;
+            }
+
+        }
+        return null;
+
+    }
+
+    public Solicitud findSolicitud(int id) {
+        sojc = new SolicitudJpaController(con.getBd());
+        return sojc.findSolicitud(id);
+    }
+    
+   public List<Solicitud> getResultados(String buscar){
+        sojc=new SolicitudJpaController(con.getBd());
+        List<Solicitud> ls=sojc.findSolicitudEntities();
+        List<Solicitud> newls=new ArrayList<>();
+        for (Solicitud l : ls) {
+            if(l.getDescripcion().contains(buscar) || l.getObservaciones().contains(buscar)){
+                newls.add(l);
+            }
+        }
+        return newls;
+    }
 
 }

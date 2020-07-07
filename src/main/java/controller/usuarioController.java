@@ -6,6 +6,7 @@
 package controller;
 
 import dao.exceptions.NonexistentEntityException;
+import dto.Solicitud;
 import dto.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +65,7 @@ public class usuarioController extends HttpServlet {
         String action=request.getParameter("action");
         System.out.println("action : "+ action);
         soporteNegocio sn=new soporteNegocio();
+        boolean calificacion =false;
         switch(action){
             
             case "eliminar":
@@ -78,11 +80,39 @@ public class usuarioController extends HttpServlet {
                 request.getSession().setAttribute("usuario", u);
                 request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
                 break;
-            case "Calificar":
-               request.getParameter("calificacion");
-               request.getParameter("observacion");
+           case "calificar":
+               int id=Integer.parseInt(request.getParameter("idinput"));
+               String cal=request.getParameter("calificacion");
+               Usuario u2= (Usuario) request.getSession().getAttribute("usuario");
+               int c=Integer.parseInt(cal);
+               String obs=request.getParameter("observacion");
+               calificacion=sn.calificar(id, c, obs);
+               if(calificacion){
+                   request.setAttribute("list",sn.getSolicitudes(u2));
+                   request.getSession().setAttribute("usuario", u2);
+                   request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
+                   
+               }
+               else{
+                    
+                   request.getRequestDispatcher("./jsp/error.jsp").forward(request, response);
+                   
+               }
+               break;
+               
+               case "showcalificar":
+                int idc=Integer.parseInt(request.getParameter("id"));
+                   Solicitud s=sn.findSolicitud(idc);
+                   Usuario u3= (Usuario) request.getSession().getAttribute("usuario");
+                   request.setAttribute("list",sn.getSolicitudes(u3));
+                   request.setAttribute("idServlet",s.getId());
+                   request.getSession().setAttribute("usuario", u3);
+                   request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
+                   break;
+            default: request.getRequestDispatcher("./jsp/error.jsp").forward(request, response);
                
         }
+        
     }
 
     /**

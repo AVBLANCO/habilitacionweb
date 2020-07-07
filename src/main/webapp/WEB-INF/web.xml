@@ -16,6 +16,22 @@
         <servlet-name>usuarioController</servlet-name>
         <servlet-class>controller.usuarioController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>asignarSolicitudController</servlet-name>
+        <servlet-class>controller.asignarSolicitudController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>responderSolicitudController</servlet-name>
+        <servlet-class>controller.responderSolicitudController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filtrarSolicitudServlet</servlet-name>
+        <servlet-class>controller.filtrarSolicitudServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>filtrrarController</servlet-name>
+        <servlet-class>controller.filtrrarController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
@@ -31,6 +47,22 @@
     <servlet-mapping>
         <servlet-name>usuarioController</servlet-name>
         <url-pattern>/usuarioController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>asignarSolicitudController</servlet-name>
+        <url-pattern>/asignarSolicitudController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>responderSolicitudController</servlet-name>
+        <url-pattern>/responderSolicitudController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filtrarSolicitudServlet</servlet-name>
+        <url-pattern>/filtrarSolicitudServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>filtrrarController</servlet-name>
+        <url-pattern>/filtrrarController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

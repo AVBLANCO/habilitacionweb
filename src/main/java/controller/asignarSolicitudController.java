@@ -5,25 +5,23 @@
  */
 package controller;
 
-import dto.Dependencia;
-import dto.Estado;
 import dto.Solicitud;
+import dto.Soporte;
 import dto.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+import javax.servlet.http.HttpSession;
 import soporte.soporteNegocio;
 
 /**
  *
  * @author Pc-Victor
  */
-public class registrarSolicitudCotroller extends HttpServlet {
+public class asignarSolicitudController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +40,10 @@ public class registrarSolicitudCotroller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet registrarSolicitudCotroller</title>");
+            out.println("<title>Servlet asignarSolicitudController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet registrarSolicitudCotroller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet asignarSolicitudController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,36 +75,16 @@ public class registrarSolicitudCotroller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String dependencia = request.getParameter("dependencia");
+        int id = Integer.parseInt(request.getParameter("id"));
+        soporteNegocio c = new soporteNegocio();
 
-        String estado = request.getParameter("estado");
-        System.out.println("estado" + estado + "-" + "dependenica" + dependencia);
-        dependencia.trim();
-        estado.trim();
-        String descripcion = request.getParameter("descripcion");
-        Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-        soporteNegocio sn = new soporteNegocio();
-        Solicitud s = new Solicitud();
-        int e = Integer.parseInt(estado);
-        int d = Integer.parseInt(dependencia);
-        Estado es = sn.findEstado(e);//revisar metodo
-        Dependencia de = sn.findDependencia(d); //revisar metodo
-        s.setEstado(es);
-        s.setFechasolicitud(new Date());
-        s.setDescripcion(descripcion);
-        s.setDependencia(de);
-        s.setUsuario(u);
-        if (sn.registrarSolicitud(s)) {
-            Usuario ne=new Usuario();
-            ne=sn.findUsuario(u.getEmail());
-            request.setAttribute("list", sn.getSolicitudes(ne));
-            request.getSession().setAttribute("usuario", ne);
-            request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("./jsp/error.jsp").forward(request, response);
-
-        }
-
+        HttpSession misession = request.getSession(true);
+        Usuario usuario = (Usuario) misession.getAttribute("Usuario");
+        Solicitud s = c.solicitudBus(id);
+        Soporte sop = c.buscarSoporte(usuario);
+        
+        c.asignar(s,sop);
+       
     }
 
     /**
