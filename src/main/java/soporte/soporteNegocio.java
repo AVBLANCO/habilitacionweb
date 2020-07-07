@@ -220,13 +220,13 @@ public class soporteNegocio {
    public List<Solicitud> getResultados(String buscar){
         sojc=new SolicitudJpaController(con.getBd());
         List<Solicitud> ls=sojc.findSolicitudEntities();
-        List<Solicitud> newls=new ArrayList<>();
+        
         for (Solicitud l : ls) {
-            if(l.getDescripcion().contains(buscar) || l.getObservaciones().contains(buscar)){
-                newls.add(l);
+            if(l.getUsuario().getUsuario().equalsIgnoreCase(buscar) ){
+                return l.getUsuario().getSolicitudList();
             }
         }
-        return newls;
+        return null;
     }
 
 }

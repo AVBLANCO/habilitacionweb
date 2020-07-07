@@ -4,6 +4,7 @@
     Author     : Pc-Victor
 --%>
 
+<%@page import="dto.Solicitud"%>
 <%@page import="dto.Usuario" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
@@ -98,7 +99,7 @@
                                 <div class="col-md-12">
                                     <div class="well well-sm">
                                         <div class="container">
-                                            <form class="form-inline" action="../filtrarController">
+                                            <form class="form-inline" action="${pageContext.request.contextPath}/filtrrarController">
                                                 <input type="text" name="frase" placeholder="Busqueda Central" title="Busqueda Rapida" class="form-control" style="width: 200px;  margin-left: 750px;">
                                                 <button type="submit" class="btn btn-primary">Buscar</button>
 
@@ -110,13 +111,11 @@
                                                         <th>Usuario</th>
                                                         <th>Fecha</th>
                                                         <th>Estado</th>
+                                                        <th>Descripcion</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-
-                                                    
-                                                   
                                                     <c:forEach var="solicitud"  items="${list}">
                                                         <tr>
                                                             <td><c:out value="${solicitud.id}"/></td>
@@ -124,9 +123,10 @@
                                                             <td><c:out value="${solicitud.usuario}"/></td>
                                                             <td><c:out value="${solicitud.fechasolicitud}"/></td>
                                                             <td><c:out value="${solicitud.estado}"/></td>
+
+                                                            <td><c:out value="${solicitud.descripcion}"/></td>
+
                                                             <td>
-
-
                                                                 <a href="#responder"/> Responder </a>
                                                                 <a href="usuarioSoporteController=asignarse&id=<c:out value="${solicitud.id}"/> ">Asignarse</a>
                                                             </td>
@@ -136,6 +136,41 @@
 
                                             </table>
                                         </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <div class="container">
+                                            <h1> Resultados de busqueda</h1>
+
+                                            <table>
+                                                <thead>
+                                                    <tr><th>Id</th>
+                                                        <th>Dependencia</th>
+                                                        <th>Usuario</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estado</th>
+                                                        <th>Descripcion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <c:forEach var="solicitud"  items="${listF}">
+                                                        <tr>
+                                                            <td><c:out value="${solicitud.id}"/></td>
+                                                            <td><c:out value="${solicitud.dependencia}"/></td>
+                                                            <td><c:out value="${solicitud.usuario}"/></td>
+                                                            <td><c:out value="${solicitud.fechasolicitud}"/></td>
+                                                            <td><c:out value="${solicitud.estado}"/></td>
+
+                                                            <td><c:out value="${solicitud.descripcion}"/></td>
+
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <br>

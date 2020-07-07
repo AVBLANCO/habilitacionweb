@@ -5,9 +5,11 @@
  */
 package controller;
 
+import dto.Solicitud;
 import dto.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +36,19 @@ public class filtrrarController extends HttpServlet {
         String frase = request.getParameter("frase");
         Usuario u= (Usuario)request.getSession().getAttribute("usuario");
         soporteNegocio sn = new soporteNegocio();
-        request.setAttribute("listF",sn.getResultados(frase));
+       
+        List<Solicitud>papi=sn.getResultados(frase);
+      if(papi!=null){
         request.getSession().setAttribute("usuario", u);
-        request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
+       request.setAttribute("list", sn.getSolicitudes());
+        request.setAttribute("listF",sn.getResultados(frase));     
+         
+        request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
+      }
+      else{
+          request.setAttribute("list",sn.getSolicitudes()); 
+        request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
+      }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
