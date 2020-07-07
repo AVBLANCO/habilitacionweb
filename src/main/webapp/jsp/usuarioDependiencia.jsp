@@ -139,8 +139,8 @@
                                                             <td><c:out value="${solicitud.descripcion}"/></td>
 
                                                             <td>
-                                                                <a href="#responder"/> Responder </a>
-                                                                <a href="usuarioSoporteController=asignarse&id=<c:out value="${solicitud.id}"/> ">Asignarse</a>
+                                                                <a href="responderSolicitudController?action=showresponder&id=<c:out value="${solicitud.id}"/> "> Responder </a>
+                                                                <a href="asignarSolicitudController?id=<c:out value="${solicitud.id}"/> ">Asignarse</a>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -243,7 +243,12 @@
                                             <div class="form-group">
                                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                                                 <div class="col-md-8">
-                                                    <input id="id" name="id" type="text" disabled="" class="form-control">
+                                                    <% 
+                                                        String idd="";
+                                                         idd=request.getParameter("idd");
+                                                        
+                                                    %>
+                                                    <input id="id" name="id" type="text" placeholder="<%=idd %>" value="<%=idd %>" disabled="" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
