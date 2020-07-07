@@ -30,6 +30,7 @@ public class cerrarSesion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().invalidate();
+        request.getSession().setAttribute("/", request);
         request.getRequestDispatcher("index.html").forward(request, response);
        
     }

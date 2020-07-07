@@ -120,6 +120,17 @@ public class Solicitud implements Serializable {
         this.calificacion = calificacion;
         this.observaciones = observaciones;
     }
+    
+    //int id,Date fecha,String respuesta,Estado estado,String obser
+
+    public Solicitud(Integer id, Date fechasolicitud, String respuesta, String observaciones, Estado estado) {
+        this.id = id;
+        this.fechasolicitud = fechasolicitud;
+        this.respuesta = respuesta;
+        this.observaciones = observaciones;
+        this.estado = estado;
+    }
+    
 
     public Integer getId() {
         return id;

@@ -47,7 +47,7 @@
 
     %>
 
-
+<jsp:useBean id="soporte" class="soporte.soporteNegocio"></jsp:useBean>
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
@@ -101,12 +101,14 @@
                                                 <div class="col-md-8">
                                                     <label for="formGroupExampleInput2">Dependencias </label> <br>
                                                     <select name="dependencia">
-                                                        <c:forEach var="a" items="${soporteNegocio.getDependencia()}">
+                                                        <c:forEach var="a" items="${soporte.getDependencia()}">
                                                             <option value="<c:out value="${a.id}"/> "> <c:out value="${a.descripcion}"/> </option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
                                             </div>
+                                            
+       
 
                                             <!--                                            <div class="form-group">
                                                                                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
@@ -130,7 +132,7 @@
                                                 <div class="col-md-8">
                                                     <label for="formGroupExampleInput2">Estado </label> <br>
                                                     <select name="estado">
-                                                        <c:forEach var="a" items="${soporteNegocio.getEstado()}">
+                                                        <c:forEach var="a" items="${soporte.getEstado()}">
                                                             <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
                                                         </c:forEach>
                                                     </select>
@@ -231,7 +233,7 @@
                                 <div class="col-md-12">
                                     <div class="well well-sm">
                                         <div class="container">
-                                            <table>
+                                            <table >
                                                 <thead>
                                                     <tr><th>Id</th>
                                                         <th>Dependencia</th>
@@ -242,7 +244,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                    <c:forEach var="solicitud"  items="${list}">
+                                                    <c:forEach var="solicitud"  items="${List}">
                                                         <tr>
                                                             <td><c:out value="${solicitud.id}"/></td>
                                                             <td><c:out value="${solicitud.dependencia}"/></td>

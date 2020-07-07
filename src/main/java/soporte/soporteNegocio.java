@@ -16,6 +16,8 @@ import dto.Estado;
 import dto.Solicitud;
 import dto.Soporte;
 import dto.Usuario;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,4 +71,7 @@ public class soporteNegocio {
         }
         return 0;
     }
+    //public Solicitud(Integer id, Date fechasolicitud, String descripcion, String texto, Date fecharespuesta, String respuesta, int calificacion, String observaciones)
+   
+    
 }

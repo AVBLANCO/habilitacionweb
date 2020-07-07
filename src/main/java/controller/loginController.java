@@ -89,7 +89,7 @@ public class loginController extends HttpServlet {
                 request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
             }else if(login == 2){
                 request.getSession().setAttribute("usuario",u);
-                request.getRequestDispatcher("./jsp/usuarioDependecia.jsp").forward(request, response);
+                request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
             }
         }else{
             request.getRequestDispatcher("./jsp/Error.jsp").forward(request, response);

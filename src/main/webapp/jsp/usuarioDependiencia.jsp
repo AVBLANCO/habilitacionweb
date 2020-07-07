@@ -40,6 +40,8 @@
         <link rel="stylesheet" href="../css/font-awesome.css">
         <link rel="stylesheet" href="../css/skdslider.css">
         <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 
     </head>
 
@@ -50,60 +52,61 @@
 
     %>
 
+    <jsp:useBean id="soporte" class="soporte.soporteNegocio"></jsp:useBean>
 
 
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container">
-            <div class="h-logo"><img style="background-color: transparent;" src="https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logo-horizontal.jpg" width="200" ></div>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <div class="h-logo"><img style="background-color: transparent;" src="https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logo-horizontal.jpg" width="200" ></div>
 
-            <ul class="nav navbar-nav navbar-right main-nav">
-                <li><a href="#intro">Inicio</a></li>
-                <li><a href="#Listar">Listar Solicitudes</a></li>
-                <li><a href="#responder">Responder Solicitudes</a></li>
-                <li><a type="button" class="btn btn-secondary" href="logOutController">Cerrar sesion</a></li>
+                <ul class="nav navbar-nav navbar-right main-nav">
+                    <li><a href="#intro">Inicio</a></li>
+                    <li><a href="#Listar">Listar Solicitudes</a></li>
+                    <li><a href="#responder">Responder Solicitudes</a></li>
+                    <li><a type="button" class="btn btn-secondary" href="logOutController">Cerrar sesion</a></li>
 
-            </ul>
+                </ul>
 
-        </div>
-    </nav>
+            </div>
+        </nav>
 
-    <section class="content-section bg-primary text-white text-center" id="intro">
-        <div class="container">
-            <div class="content-section-heading">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
+        <section class="content-section bg-primary text-white text-center" id="intro">
+            <div class="container">
+                <div class="content-section-heading">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <br>
-        <br>
-    </section>
+            <br>
+            <br>
+        </section>
 
 
-    <section id="Listar">
-        <div class="container">
-            <h2>Listar Solicitudes</h2>
-            <div class="grid_3 grid_5">
-                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-                    <div id="myTabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="well well-sm">
-                                        <div class="container">
-                                            <table>
-                                                <thead>
-                                                    <tr><th>Id</th>
-                                                        <th>Dependencia</th>
-                                                        <th>Usuario</th>
-                                                        <th>Fecha</th>
-                                                        <th>Estado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+        <section id="Listar">
+            <div class="container">
+                <h2>Listar Solicitudes</h2>
+                <div class="grid_3 grid_5">
+                    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="well well-sm">
+                                            <div class="container">
+                                                <table>
+                                                    <thead>
+                                                        <tr><th>Id</th>
+                                                            <th>Dependencia</th>
+                                                            <th>Usuario</th>
+                                                            <th>Fecha</th>
+                                                            <th>Estado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                     <c:forEach var="solicitud"  items="${list}">
                                                         <tr>
                                                             <td><c:out value="${solicitud.id}"/></td>
@@ -174,7 +177,6 @@
 
                                         <fieldset>
 
-
                                             <legend class="text-center header">Responder tu Solicitud:</legend>
 
                                             <div class="form-group">
@@ -182,7 +184,7 @@
                                                 <div class="col-md-8">
                                                     <input id="id" name="id" type="text" disabled="" class="form-control">
                                                 </div>
-                                            </div
+                                            </div>
                                             <div class="form-group">
                                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                                                 <div class="col-md-8">
@@ -204,7 +206,7 @@
                                                 <div class="col-md-8">
                                                     <label for="formGroupExampleInput2">Estado </label> <br>
                                                     <select name="estado">
-                                                        <!-- <c:forEach var="a" items="${soporteNegocio.getEstado()}">
+                                                        <!-- <c:forEach var="a" items="${soporte.getEstado()}">
                                                              <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
                                                         </c:forEach>-->
                                                     </select>
