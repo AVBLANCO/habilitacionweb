@@ -64,6 +64,7 @@
                     <li><a href="#Listar">Listar Solicitudes</a></li>
                     <li><a href="#responder">Responder Solicitudes</a></li>
                     <li><a type="button" class="btn btn-secondary" href="logOutController">Cerrar sesion</a></li>
+                    <li> <a> <%=alsesion.getNombre() %></a>  </li>
 
                 </ul>
 

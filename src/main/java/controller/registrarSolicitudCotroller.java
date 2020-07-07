@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import soporte.soporteNegocio;
 
 /**
@@ -77,7 +78,10 @@ public class registrarSolicitudCotroller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String dependencia=request.getParameter("dependencia");
+        
         String estado=request.getParameter("estado");
+        System.out.println("estado"+estado+"-"+"dependenica"+dependencia);
+        JOptionPane.showMessageDialog(null, "estado"+estado+"-"+"dependenica"+dependencia);
         String descripcion=request.getParameter("descripcion");
         Usuario u=(Usuario) request.getSession().getAttribute("usuario");
         soporteNegocio sn=new soporteNegocio();

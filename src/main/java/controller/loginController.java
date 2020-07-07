@@ -75,20 +75,28 @@ public class loginController extends HttpServlet {
         
         String email=request.getParameter("email");
         String clave=request.getParameter("clave");
+      
         soporteNegocio sn=new soporteNegocio();
         int login= sn.login(email, clave);
         System.out.println(" int login: "+login);
         Usuario u=new Usuario();
         u.setEmail(email);
         u.setClave(clave);
+       
         System.out.println("");
         
         if(login != 0){
+            
+            Usuario us=sn.findUsuario(email);
+            
             if(login == 1){
-                request.getSession().setAttribute("usuario",u);
+                request.getSession().setAttribute("usuario",us);
+                request.setAttribute("list",sn.getSolicitudes(us));
                 request.getRequestDispatcher("./jsp/usuario.jsp").forward(request, response);
             }else if(login == 2){
-                request.getSession().setAttribute("usuario",u);
+                request.getSession().setAttribute("usuario",us);
+                request.setAttribute("list",sn.getSolicitudes());
+
                 request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
             }
         }else{

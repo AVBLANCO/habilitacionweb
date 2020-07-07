@@ -18,7 +18,7 @@ import dto.Estado;
 import dto.Solicitud;
 import dto.Soporte;
 import dto.Usuario;
-import java.sql.Timestamp;
+
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -145,5 +145,13 @@ public class soporteNegocio {
         }
         return false;
     }
+    
+    public List<Solicitud> getSolicitudes(Usuario u){
+        sojc=new SolicitudJpaController(con.getBd());
+        Usuario user=this.findUsuario(u.getEmail());
+        return user.getSolicitudList();
+    }
+   
+
 
 }
