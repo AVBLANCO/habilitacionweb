@@ -90,6 +90,8 @@
 
     <section id="Listar">
         <div class="container">
+            
+            
             <h2>Listar Solicitudes</h2>
             <div class="grid_3 grid_5">
                 <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
@@ -98,12 +100,21 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="well well-sm">
-                                        <div class="container">
+                                        
+                                       <%
+//                                          String est=request.getParameter("estado");
+//                                          if(est=="false") 
+//                                              
+//  { %>
+                                     
+
                                             <form class="form-inline" action="${pageContext.request.contextPath}/filtrrarController">
                                                 <input type="text" name="frase" placeholder="Busqueda Central" title="Busqueda Rapida" class="form-control" style="width: 200px;  margin-left: 750px;">
                                                 <button type="submit" class="btn btn-primary">Buscar</button>
 
                                             </form>
+                                                  
+                                                
                                             <table>
                                                 <thead>
                                                     <tr><th>Id</th>
@@ -115,6 +126,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    
 
                                                     <c:forEach var="solicitud"  items="${list}">
                                                         <tr>
@@ -138,6 +150,9 @@
                                         </div>
                                         <br>
                                         <br>
+                                      <% //} else{
+
+                                      %>
                                         <br>
                                         <div class="container">
                                             <h1> Resultados de busqueda</h1>
@@ -171,6 +186,7 @@
                                             </table>
                                         </div>
 
+                                        <% //} %>
                                     </div>
                                 </div>
                                 <br>

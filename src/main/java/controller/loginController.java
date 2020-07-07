@@ -75,6 +75,7 @@ public class loginController extends HttpServlet {
         
         String email=request.getParameter("email");
         String clave=request.getParameter("clave");
+        request.setAttribute("estado", true);
       
         soporteNegocio sn=new soporteNegocio();
         int login= sn.login(email, clave);
@@ -96,6 +97,7 @@ public class loginController extends HttpServlet {
             }else if(login == 2){
                 request.getSession().setAttribute("usuario",us);
                 request.setAttribute("list",sn.getSolicitudes());
+                
 
                 request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
             }

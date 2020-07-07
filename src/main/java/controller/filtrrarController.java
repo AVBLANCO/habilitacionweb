@@ -34,21 +34,23 @@ public class filtrrarController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String frase = request.getParameter("frase");
-        Usuario u= (Usuario)request.getSession().getAttribute("usuario");
+        Usuario u = (Usuario) request.getSession().getAttribute("usuario");
         soporteNegocio sn = new soporteNegocio();
-       
-        List<Solicitud>papi=sn.getResultados(frase);
-      if(papi!=null){
-        request.getSession().setAttribute("usuario", u);
-       request.setAttribute("list", sn.getSolicitudes());
-        request.setAttribute("listF",sn.getResultados(frase));     
-         
-        request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
-      }
-      else{
-          request.setAttribute("list",sn.getSolicitudes()); 
-        request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
-      }
+
+        List<Solicitud> papi = sn.getResultados(frase);
+        if (papi != null) {
+
+            request.setAttribute("estado", true);
+            request.getSession().setAttribute("usuario", u);
+            request.setAttribute("list", sn.getSolicitudes());
+            request.setAttribute("listF", sn.getResultados(frase));
+
+            request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
+        } else {
+            request.setAttribute("estado", false);
+            request.setAttribute("list", sn.getSolicitudes());
+            request.getRequestDispatcher("./jsp/usuarioDependiencia.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
