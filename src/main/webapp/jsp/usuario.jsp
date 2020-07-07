@@ -130,7 +130,7 @@
                                             <div class="form-group">
                                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                                                 <div class="col-md-8">
-                                                    <input id="descripcion" name="Descripcion " type="textarea" placeholder="Describa su Solicitud" class="form-control" />
+                                                    <input id="Descripcion" name="descripcion " type="textarea" placeholder="Describa su Solicitud" class="form-control" />
                                                 </div>
                                             </div>
                                             <!--                                            <div class="form-group">
@@ -228,10 +228,10 @@
                                                 <c:forEach var="solicitud"  items="${list}">
                                                     <tr>
                                                         <td><c:out value="${solicitud.id}"/></td>
-                                                        <td><c:out value="${solicitud.dependencia}"/></td>
-                                                        <td><c:out value="${solicitud.usuario}"/></td>
+                                                        <td><c:out value="${solicitud.dependencia.descripcion}"/></td>
+                                                        <td><c:out value="${solicitud.usuario.usuario}"/></td>
                                                         <td><c:out value="${solicitud.fechasolicitud}"/></td>
-                                                        <td><c:out value="${solicitud.estado}"/></td>
+                                                        <td><c:out value="${solicitud.estado.descripcion}"/></td>
                                                         <td><a href="usuarioController?action=showcalificar&id= <c:out value="${solicitud.id}"/>" data-toggle="modal" data-target="#myModal"> Calificar </a></td>
                                                         
                                                         <td><a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> "> Eliminar </a></td>

@@ -131,10 +131,10 @@
                                                     <c:forEach var="solicitud"  items="${list}">
                                                         <tr>
                                                             <td><c:out value="${solicitud.id}"/></td>
-                                                            <td><c:out value="${solicitud.dependencia}"/></td>
-                                                            <td><c:out value="${solicitud.usuario}"/></td>
+                                                            <td><c:out value="${solicitud.dependencia.descripcion}"/></td>
+                                                            <td><c:out value="${solicitud.usuario.usuario}"/></td>
                                                             <td><c:out value="${solicitud.fechasolicitud}"/></td>
-                                                            <td><c:out value="${solicitud.estado}"/></td>
+                                                            <td><c:out value="${solicitud.estado.descripcion}"/></td>
 
                                                             <td><c:out value="${solicitud.descripcion}"/></td>
 
@@ -172,10 +172,10 @@
                                                     <c:forEach var="solicitud"  items="${listF}">
                                                         <tr>
                                                             <td><c:out value="${solicitud.id}"/></td>
-                                                            <td><c:out value="${solicitud.dependencia}"/></td>
-                                                            <td><c:out value="${solicitud.usuario}"/></td>
+                                                            <td><c:out value="${solicitud.dependencia.descripcion}"/></td>
+                                                            <td><c:out value="${solicitud.usuario.usuario}"/></td>
                                                             <td><c:out value="${solicitud.fechasolicitud}"/></td>
-                                                            <td><c:out value="${solicitud.estado}"/></td>
+                                                            <td><c:out value="${solicitud.estado.descripcion}"/></td>
 
                                                             <td><c:out value="${solicitud.descripcion}"/></td>
 
