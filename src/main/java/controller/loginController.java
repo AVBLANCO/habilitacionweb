@@ -81,6 +81,7 @@ public class loginController extends HttpServlet {
         Usuario u=new Usuario();
         u.setEmail(email);
         u.setClave(clave);
+        System.out.println("");
         
         if(login != 0){
             if(login == 1){

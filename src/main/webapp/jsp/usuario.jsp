@@ -33,16 +33,20 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/font-awesome.css">
+        <link rel="stylesheet" href="../css/skdslider.css">
 
     </head>
 
 
-            <% Usuario alsesion = (Usuario) request.getSession().getAttribute("usuario");
-    
-                if (alsesion != null) {
-    
-            %>
-    
+    <% Usuario alsesion = (Usuario) request.getSession().getAttribute("usuario");
+
+        if (alsesion != null) {
+
+    %>
+
 
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -84,93 +88,109 @@
                         <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
                             <div class="row">
                                 <div class="col-md-12">
-                                    
-                                        <form class="form-horizontal" action="${pageContext.request.contextPath}/registrarSolicitudCotroller" method="POST">
 
-                                            <fieldset>
+                                    <form class="form-horizontal" action="${pageContext.request.contextPath}/registrarSolicitudCotroller" method="POST">
+
+                                        <fieldset>
 
 
-                                                <legend class="text-center header">Tu Solicitud aqui:</legend>
+                                            <legend class="text-center header">Tu Solicitud aqui:</legend>
 
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <label for="formGroupExampleInput2">Dependencias </label> <br>
-                                                        <select name="dependencia">
-                                                            <c:forEach var="a" items="${soporteNegocio.getDependencia()}">
-                                                                 <option value="<c:out value="${a.id}"/> "> <c:out value="${a.descripcion}"/> </option>
-                                                             </c:forEach>
-                                                        </select>
-                                                    </div>
+                                            <div class="form-group">
+                                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                <div class="col-md-8">
+                                                    <label for="formGroupExampleInput2">Dependencias </label> <br>
+                                                    <select name="dependencia">
+                                                        <c:forEach var="a" items="${soporteNegocio.getDependencia()}">
+                                                            <option value="<c:out value="${a.id}"/> "> <c:out value="${a.descripcion}"/> </option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
+                                            </div>
 
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <input id="usuario" name="usuario" type="text" placeholder="Ingrese su usuario aqui" class="form-control">
-                                                    </div>
-                                                </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                                                            <div class="col-md-8">
+                                                                                                <input id="usuario" name="usuario" type="text" placeholder="Ingrese su usuario aqui" class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                            
+                                            
+                                                                                        <div class="form-group">
+                                                                                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                                                            <div class="col-md-8">
+                                                                                                <input type="date" id="fechasolicitud" name="trip-start"
+                                                                                                       value="2020-07-22"
+                                                                                                       min="2000-01-01" max="2050-12-31">
+                                                                                            </div>
+                                                                                        </div>-->
 
-
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <input type="date" id="fechasolicitud" name="trip-start"
-                                                               value="2020-07-22"
-                                                               min="2000-01-01" max="2050-12-31">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <label for="formGroupExampleInput2">Estado </label> <br>
-                                                        <select name="estado">
+                                            <div class="form-group">
+                                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                <div class="col-md-8">
+                                                    <label for="formGroupExampleInput2">Estado </label> <br>
+                                                    <select name="estado">
                                                         <c:forEach var="a" items="${soporteNegocio.getEstado()}">
-                                                                 <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
-                                                             </c:forEach>
-                                                        </select>
-                                                    </div>
+                                                            <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
+                                            </div>
+
+                                            <!--
+                                            -->
 
 
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <input id="descripcion" name="Descripcion " type="textarea" placeholder="Describa su Solicitud" class="form-control">
-                                                    </div>
+                                            <div class="form-group">
+                                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                <div class="col-md-8">
+                                                    <input id="descripcion" name="Descripcion " type="textarea" placeholder="Describa su Solicitud" class="form-control">
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
-                                                    <div class="col-md-8">
-                                                        <form action="" method="post" enctype="multipart/form-data" target="_blank">
-                                                            <p>
-
-                                                                Sube un archivo:
-
-                                                                <input type="file" name="archivosubido">
-
-
-                                                            </p>
-
-                                                        </form>
-
-                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" name="calificacion">
+                                                        <option selected >Calificacion</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
                                                 </div>
+                                            </div>
 
-                                                <br>
-                                                <br>
-                                                <br>
+                                            <div class="form-group">
+                                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                                                <div class="col-md-8">
+                                                    <form action="" method="post" enctype="multipart/form-data" target="_blank">
+                                                        <p>
 
-                                                <div class="form-group">
-                                                    <div class="col-md-12 text-center">
-                                                        <button type="submit" class="btn btn-primary btn-lg">Registrar Solicitud</button>
-                                                    </div>
+                                                            Sube un archivo:
+
+                                                            <input type="file" name="archivosubido">
+
+
+                                                        </p>
+
+                                                    </form>
+
                                                 </div>
-                                            </fieldset>
-                                        </form>
-                                    
+                                            </div>
+
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <div class="col-md-12 text-center">
+                                                    <button type="submit" class="btn btn-primary btn-lg">Registrar Solicitud</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -222,18 +242,20 @@
                                                 </thead>
                                                 <tbody>
 
-                                                <c:forEach var="solicitud"  items="${list}">
-                                                    <tr>
-                                                        <td><c:out value="${solicitud.id}"/></td>
-                                                    <td><c:out value="${solicitud.dependencia}"/></td>
-                                                    <td><c:out value="${solicitud.usuario}"/></td>
-                                                    <td><c:out value="${solicitud.fechasolicitud}"/></td>
-                                                    <td><c:out value="${solicitud.estado}"/></td>
-                                                    <td><a href="usuarioController?action=showEditar&id=<c:out value="${solicitud.id}"/> Editar </a>
-                                                        <a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> Eliminar</a>
-                                                    </td>
-                                                    </tr>
-                                                </c:forEach>
+                                                    <c:forEach var="solicitud"  items="${list}">
+                                                        <tr>
+                                                            <td><c:out value="${solicitud.id}"/></td>
+                                                            <td><c:out value="${solicitud.dependencia}"/></td>
+                                                            <td><c:out value="${solicitud.usuario}"/></td>
+                                                            <td><c:out value="${solicitud.fechasolicitud}"/></td>
+                                                            <td><c:out value="${solicitud.estado}"/></td>
+                                                            <td>
+                                                                <a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> "> Eliminar</a>
+
+                                                            </td>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
 
                                             </table>
@@ -278,5 +300,12 @@
 
 
 <footer> Habilitacion web - 2020</footer>
+
+
+<%           } else {  %>
+
+<% response.sendRedirect("../index.html"); %>
+<%   }
+%>
 </body>
 </html>
