@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : usuario
+    Created on : 6/07/2020, 06:50:01 PM
+    Author     : Pc-Victor
+--%>
+<%@page import="dto.Usuario" %> 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="soporte.soporteNegocio" %> 
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Solicitudes UFPS - Usuario</title>
@@ -27,16 +33,17 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     </head>
 
-    <!--
-            <% usuario alsesion = (usuario) request.getSession().getAttribute("usuario");
+
+            <% Usuario alsesion = (Usuario) request.getSession().getAttribute("usuario");
     
                 if (alsesion != null) {
     
             %>
     
-    -->
+
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
@@ -45,7 +52,8 @@ and open the template in the editor.
             <ul class="nav navbar-nav navbar-right main-nav">
                 <li><a href="#intro">Inicio</a></li>
                 <li><a href="#Solicitud">Registrar Solicitud</a></li>
-                <li><a href="#servicios">Listar Solicitudes</a></li>
+                <li><a href="#Listar">Listar Solicitudes</a></li>
+                <li><a type="button" class="btn btn-secondary" href="cerrarSesion">Cerrar sesion</a></li>
 
             </ul>
 
@@ -76,7 +84,7 @@ and open the template in the editor.
                         <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="well well-sm">
+                                    
                                         <form class="form-horizontal" action="${pageContext.request.contextPath}/registrarSolicitudCotroller" method="POST">
 
                                             <fieldset>
@@ -89,9 +97,9 @@ and open the template in the editor.
                                                     <div class="col-md-8">
                                                         <label for="formGroupExampleInput2">Dependencias </label> <br>
                                                         <select name="dependencia">
-                                                            <!-- <c:forEach var="a" items="${soporteNegocio.getDependencia()}">
-                                                                 <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
-                                                             </c:forEach>-->
+                                                            <c:forEach var="a" items="${soporteNegocio.getDependencia()}">
+                                                                 <option value="<c:out value="${a.id}"/> "> <c:out value="${a.descripcion}"/> </option>
+                                                             </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -118,9 +126,9 @@ and open the template in the editor.
                                                     <div class="col-md-8">
                                                         <label for="formGroupExampleInput2">Estado </label> <br>
                                                         <select name="estado">
-                                                            <!-- <c:forEach var="a" items="${soporteNegocio.getEstado()}">
+                                                        <c:forEach var="a" items="${soporteNegocio.getEstado()}">
                                                                  <option value="<c:out value="${a.id}"/>"><c:out value="${a.descripcion}"/></option>
-                                                             </c:forEach>-->
+                                                             </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -154,9 +162,15 @@ and open the template in the editor.
                                                 <br>
                                                 <br>
                                                 <br>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12 text-center">
+                                                        <button type="submit" class="btn btn-primary btn-lg">Registrar Solicitud</button>
+                                                    </div>
+                                                </div>
                                             </fieldset>
                                         </form>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -169,6 +183,7 @@ and open the template in the editor.
     <br>
     <br>
     <br>
+
 
     <section class="content-section bg-primary text-white text-center" id="intro">
         <div class="container">
@@ -185,12 +200,83 @@ and open the template in the editor.
         <br>
     </section>
 
+    <section id="Listar">
+        <div class="container">
+            <h2>Listar Solicitudes</h2>
+            <div class="grid_3 grid_5">
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well well-sm">
+                                        <div class="container">
+                                            <table>
+                                                <thead>
+                                                    <tr><th>Id</th>
+                                                        <th>Dependencia</th>
+                                                        <th>Usuario</th>
+                                                        <th>Fecha</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <c:forEach var="solicitud"  items="${list}">
+                                                    <tr>
+                                                        <td><c:out value="${solicitud.id}"/></td>
+                                                    <td><c:out value="${solicitud.dependencia}"/></td>
+                                                    <td><c:out value="${solicitud.usuario}"/></td>
+                                                    <td><c:out value="${solicitud.fechasolicitud}"/></td>
+                                                    <td><c:out value="${solicitud.estado}"/></td>
+                                                    <td><a href="usuarioController?action=showEditar&id=<c:out value="${solicitud.id}"/> Editar </a>
+                                                        <a href="usuarioController?action=eliminar&id=<c:out value="${solicitud.id}"/> Eliminar</a>
+                                                    </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<br>
+<br>
+<br>
+
+<section class="content-section bg-primary text-white text-center" id="intro">
+    <div class="container">
+        <div class="content-section-heading">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+</section>     
 
 
 
 
-
-
-    <footer> Habilitacion web - 2020</footer>
+<footer> Habilitacion web - 2020</footer>
 </body>
 </html>
